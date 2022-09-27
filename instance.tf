@@ -1,12 +1,19 @@
 provider "aws" {
-  region     = "us-west-2"
-  access_key = var.access-key
-  secret_key = var.secert-key
+  region     = var.region
+# taken from acces.tf file with list function
+  access_key = element(var.key, 0)
+  secret_key = element(var.key, 1)
 }
 
+locals {
+  common_tags = {
+    Name    = "DevOps"
+    service = "web_operation"
+  }
+}
 
 resource "aws_instance" "myinstance1" {
-  ami           = "ami-017fecd1353bcc96e"
+  ami           = lookup(var.ami_id, var.linux)
   instance_type = "t2.micro"
-  count = 5
+  count         = 1
 }
