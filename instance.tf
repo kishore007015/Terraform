@@ -8,14 +8,5 @@ provider "aws" {
 resource "aws_instance" "myinstance1" {
   ami           = "ami-017fecd1353bcc96e"
   instance_type = "t2.micro"
-}
-
-resource "aws_instance" "myinstance2" {
-  ami           = "ami-017fecd1353bcc96e"
-  instance_type = "t2.micro"
-}
-
-resource "aws_instance" "myinstance3" {
-  ami           = "ami-017fecd1353bcc96e"
-  instance_type = "t2.micro"
+  count = 5
 }
